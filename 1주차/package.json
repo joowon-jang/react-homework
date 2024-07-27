@@ -1,0 +1,12 @@
+{
+  "name": "react-homework",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "테킷 프론트엔드스쿨 10기 리액트 과제 저장소",
+  "scripts": {
+    "dev": "node server.mjs"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
