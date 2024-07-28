@@ -1,5 +1,5 @@
 import { createElement as h } from "https://esm.sh/react";
-import MannerTemperature from "/src/components/ProfileInfo/MannerTemperature.js";
+import MannerTemperature from "./MannerTemperature.js";
 
 /*
   <section
@@ -34,7 +34,7 @@ import MannerTemperature from "/src/components/ProfileInfo/MannerTemperature.js"
 */
 
 function ProfileInfo(props) {
-  const { photo, userName, userAddress, temperature } = props;
+  const { id, photo, userName, userAddress, temperature } = props;
   return h(
     "section",
     { "aria-label": "판매자 프로필 정보", className: "profile-info" },
@@ -49,7 +49,7 @@ function ProfileInfo(props) {
         h("div", null, h("dt", { className: "sr-only" }, "판매자 주소:"), h("dd", null, userAddress))
       )
     ),
-    h(MannerTemperature, { temperature })
+    h(MannerTemperature, { id, temperature })
   );
 }
 

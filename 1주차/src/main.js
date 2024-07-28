@@ -1,6 +1,6 @@
 import React from "https://esm.sh/react";
 import { createRoot } from "https://esm.sh/react-dom";
-import ProfileInfoPage from "/src/pages/ProfileInfoPage.js";
+import ProfileInfoPage from "./pages/ProfileInfoPage.js";
 
 const container = document.getElementById("react-app");
 

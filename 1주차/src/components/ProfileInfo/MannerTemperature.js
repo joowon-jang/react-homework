@@ -17,7 +17,7 @@ import { createElement as h } from "https://esm.sh/react";
 */
 
 function MannerTemperature(props) {
-  const { temperature } = props;
+  const { id, temperature } = props;
 
   let temperatureIcon;
   let fontColor;
@@ -42,14 +42,14 @@ function MannerTemperature(props) {
         "span",
         {
           style: { color: `${fontColor}` },
-          "aria-labelledby": "manner-label",
+          "aria-labelledby": `manner-label-${id}`,
           className: "manner-info__temperature",
         },
         `${temperature}°C`
       ),
       h("span", { className: "manner-info__icon" }, `${temperatureIcon}`)
     ),
-    h("span", { id: "manner-label", className: "manner-info__label" }, "매너온도")
+    h("span", { id: `manner-label-${id}`, className: "manner-info__label" }, "매너온도")
   );
 }
 
