@@ -1,7 +1,8 @@
+import ProfileInfoPage from "./pages/ProfileInfoPage";
 import "./styles/main.css";
 
 function App() {
-  return <></>;
+  return <ProfileInfoPage />;
 }
 
 export default App;

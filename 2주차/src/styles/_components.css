@@ -1,0 +1,66 @@
+/* MannerTemperature */
+.manner-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+.manner-info-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+  margin-block-end: -0.5rem;
+
+  .manner-info__temperature {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 150%;
+    color: var(--secondary);
+  }
+  .manner-info__icon {
+    font-size: 1.4375rem;
+    font-weight: 600;
+    line-height: 150%;
+  }
+}
+.manner-info__label {
+  font-size: 0.65625rem;
+  line-height: 160%;
+  color: var(--contentSecondary);
+}
+
+/* ProfileInfo */
+.profile-info {
+  inline-size: 100%;
+  background-color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.8125rem;
+}
+.profile-info-personal {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+
+  > img {
+    block-size: 2.5rem;
+    inline-size: 2.5rem;
+    border-radius: 9999px;
+  }
+
+  > dl {
+    display: flex;
+    flex-direction: column;
+
+    > div:first-child {
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 150%;
+    }
+    > div:last-child {
+      font-size: 0.65625rem;
+      line-height: 160%;
+    }
+  }
+}
