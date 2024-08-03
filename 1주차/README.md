@@ -52,3 +52,13 @@ Figma 컴포넌트 → React 컴포넌트로 설계하는 것이 과제입니다
 - MannerTemperature 컴포넌트를 만든 후 ProfileInfo 컴포넌트에서 import해서 사용
 - ProfileInfo 컴포넌트를 사용한 3가지 예시를 ProfileInfoPage 페이지에 보여줌
 <img width="800" src="https://github.com/user-attachments/assets/15aa62a5-cb0e-4121-84fa-079f2f2c4e0a">
+
+## 피드백 반영
+- ⚠️ Figma 컴포넌트에 의미없는 Frame 이름을 적절하게 지어주세요. (예: Frame 5)
+  <br/>-> 수정 완료
+- ⚠️ 파일 경로 불러오는 방식을 변경할 필요가 있어요. 상대 경로를 사용하세요.<br/>`"/src/pages/ProfileInfoPage.js" → "./pages/ProfileInfoPage.js"`
+  <br/>-> 수정 완료
+- ⚠️ 웹 표준 준수가 필요합니다. 현재 `<ul>` 요소 자식이 `<li>`가 아닌, `<section>`입니다.
+  <br/>-> 수정 완료
+- ⚠️ ID 속성이 중복되면 안됩니다. (예: manner-label)
+  <br/>-> 수정 완료
