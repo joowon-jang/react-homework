@@ -1,8 +1,8 @@
 {
-  "name": "react-homework",
+  "name": "react-homework-week1",
   "type": "module",
   "version": "1.0.0",
-  "description": "테킷 프론트엔드스쿨 10기 리액트 과제 저장소",
+  "description": "테킷 프론트엔드스쿨 10기 리액트 과제 저장소 - 1주차",
   "scripts": {
     "dev": "node server.mjs"
   },
