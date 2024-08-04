@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+## 과제 내용
+### [2주차 주말 과제] 컴포넌트 속성 검사 및 테스트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+바닐라 프로젝트 UI 결과물 중 일부를 선별한 후, 리액트를 사용해 컴포넌트로 구현합니다.
+컴포넌트 구현 과정에서 속성 검사 및 테스트 코드를 작성하는 것이 과제입니다.
 
-Currently, two official plugins are available:
+[x]아토믹(atomic) 또는 몰레큘(molecule) 컴포넌트를 작성합니다.
+[x]작성된 컴포넌트는 속성(props) 검사를 포함해야 합니다.
+[x]속성 검사는 prop-types, TypeScript 중 선택하세요.
+-[ ]Vitest를 사용해 컴포넌트 테스트 코드를 작성합니다. (옵션)-
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 수행 조건
+과제는 아래 조건을 충족해야 합니다.
 
-## Expanding the ESLint configuration
+모두가 접근 가능
+의미있는 구조 설계
+체계적인 표현 설계
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 제출 방법
+본 과제의 목적은 완성이 아닙니다.
+어느 정도까지 결과 수행이 가능한 지 확인하는 것입니다.
+그러니 진행된 부분까지만 수행 결과를 제출합니다.
 
-- Configure the top-level `parserOptions` property like this:
+유의미한 설계 경험을 가지길 바랍니다. (Figma 디자인 / React 개발)
+과제 수행 GitHub 저장소에 코드를 푸시합니다. (Figma 디자인 URL 포함)
+과제 수행(난관, 극복 등) 과정을 README.md 파일에 기록하세요.
+과제를 수행한 저장소 URL을 과제 수행 채널에 남깁니다.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 과제 수행
+- TypeScript를 사용하여 속성 검사를 수행했습니다.
+- tsconfig 파일과 eslint, vite.config 파일을 작성하는 부분에 신경을 많이 썼습니다.
+- `pnpm create vite` 명령어로 auto scaffold된 tsconfig 코드들이 어떤 동작을 하는지 알아보고 추가로 마음에 드는 기능을 추가했습니다.
