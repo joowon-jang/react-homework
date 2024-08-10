@@ -10,16 +10,13 @@ function Game() {
   const [gameHistory, setGameHistory] = useState([INITIAL_SQUARES]);
   const [gameIndex, setGameIndex] = useState(0);
 
-  const currentPlayer = (gameHistory.length - 1) % PLAYER_NUMBER;
+  const currentPlayer = PLAYER[(gameHistory.length - 1) % PLAYER_NUMBER];
+  const currentSquares = gameHistory[gameIndex];
 
   const onSquareClick = (index: number) => () => {
-    setGameHistory([
-      ...gameHistory,
-      gameHistory[gameIndex].map((square, i) => {
-        return index === i ? PLAYER[currentPlayer] : square;
-      }),
-    ]);
+    const nextGameHistory = [...gameHistory, currentSquares.map((square, i) => (index === i ? currentPlayer : square))];
 
+    setGameHistory(nextGameHistory);
     setGameIndex(gameIndex + 1);
   };
 
