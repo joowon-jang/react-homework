@@ -2,7 +2,7 @@ export const INITIAL_SQUARES = Array(9).fill(null);
 
 export const PLAYER = ["🍡", "🍙"] as const;
 
-export const PLAYER_NUMBER = Object.keys(PLAYER).length;
+export const PLAYER_NUMBER = PLAYER.length;
 
 export const WINNERS_COLOR = "#fede53";
 

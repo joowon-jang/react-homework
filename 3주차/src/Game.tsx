@@ -10,7 +10,7 @@ function Game() {
   const [gameHistory, setGameHistory] = useState([INITIAL_SQUARES]);
   const [gameIndex, setGameIndex] = useState(0);
 
-  const currentPlayer = PLAYER[(gameHistory.length - 1) % PLAYER_NUMBER];
+  const currentPlayer = PLAYER[gameIndex % PLAYER_NUMBER];
   const currentSquares = gameHistory[gameIndex];
 
   const winnerInfo = checkWinner(currentSquares);
