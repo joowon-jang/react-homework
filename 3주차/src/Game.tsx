@@ -21,13 +21,18 @@ function Game() {
       alert("Game Over");
       return;
     }
-    const nextGameHistory = [...gameHistory, currentSquares.map((square, i) => (index === i ? currentPlayer : square))];
+    const nextGameHistory = [
+      ...gameHistory.slice(0, gameIndex + 1),
+      currentSquares.map((square, i) => (index === i ? currentPlayer : square)),
+    ];
 
     setGameHistory(nextGameHistory);
     setGameIndex(gameIndex + 1);
   };
 
-  const onTimeTravel = () => {};
+  const onTimeTravel = (index: number) => () => {
+    setGameIndex(index);
+  };
 
   return (
     <div className={CSS.component}>
@@ -38,7 +43,7 @@ function Game() {
         squares={currentSquares}
         onSquareClick={onSquareClick}
       />
-      <History />
+      <History gameHistory={gameHistory} gameIndex={gameIndex} handleClick={onTimeTravel} />
     </div>
   );
 }
