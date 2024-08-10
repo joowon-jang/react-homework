@@ -14,6 +14,7 @@ function Game() {
   const currentSquares = gameHistory[gameIndex];
 
   const winnerInfo = checkWinner(currentSquares);
+  const isDraw = currentSquares.every(Boolean) && !winnerInfo;
 
   const onSquareClick = (index: number) => () => {
     if (winnerInfo) {
@@ -30,7 +31,13 @@ function Game() {
 
   return (
     <div className={CSS.component}>
-      <Board winnerInfo={winnerInfo} squares={currentSquares} onSquareClick={onSquareClick} />
+      <Board
+        winnerInfo={winnerInfo}
+        currentPlayer={currentPlayer}
+        isDraw={isDraw}
+        squares={currentSquares}
+        onSquareClick={onSquareClick}
+      />
       <History />
     </div>
   );
