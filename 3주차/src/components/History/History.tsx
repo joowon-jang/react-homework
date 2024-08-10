@@ -1,3 +1,4 @@
+import HistoryButton from "../HistoryButton/HistoryButton";
 import CSS from "./History.module.css";
 
 interface HistoryPropsType {
@@ -16,9 +17,7 @@ const History = ({ gameHistory, gameIndex, handleClick }: HistoryPropsType) => {
 
           return (
             <li key={index}>
-              <button type="button" disabled={isDisabled} onClick={handleClick(index)}>
-                {buttonLabel}
-              </button>
+              <HistoryButton buttonLabel={buttonLabel} isDisabled={isDisabled} handleClick={handleClick(index)} />
             </li>
           );
         })}
