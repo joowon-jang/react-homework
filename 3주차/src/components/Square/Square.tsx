@@ -1,15 +1,17 @@
+import { CSSProperties } from "react";
 import CSS from "./Square.module.css";
 
 interface SquarePropsType {
+  style?: CSSProperties;
   children?: PlayerType;
   onClick: () => void;
 }
 
-const Square = ({ children, onClick }: SquarePropsType) => {
+const Square = ({ children, style, onClick }: SquarePropsType) => {
   const isDisabled = !!children;
 
   return (
-    <button className={CSS.component} disabled={isDisabled} onClick={onClick}>
+    <button className={CSS.component} style={style} disabled={isDisabled} onClick={onClick}>
       {children}
     </button>
   );

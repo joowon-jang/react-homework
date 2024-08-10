@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Board from "./components/Board/Board";
 import History from "./components/History/History";
-import { INITIAL_SQUARES, PLAYER, PLAYER_NUMBER } from "./constants";
+import { checkWinner, INITIAL_SQUARES, PLAYER, PLAYER_NUMBER } from "./constants";
 
 import CSS from "./Game.module.css";
 import "./styles/main.css";
@@ -13,7 +13,13 @@ function Game() {
   const currentPlayer = PLAYER[(gameHistory.length - 1) % PLAYER_NUMBER];
   const currentSquares = gameHistory[gameIndex];
 
+  const winnerInfo = checkWinner(currentSquares);
+
   const onSquareClick = (index: number) => () => {
+    if (winnerInfo) {
+      alert("Game Over");
+      return;
+    }
     const nextGameHistory = [...gameHistory, currentSquares.map((square, i) => (index === i ? currentPlayer : square))];
 
     setGameHistory(nextGameHistory);
@@ -24,7 +30,7 @@ function Game() {
 
   return (
     <div className={CSS.component}>
-      <Board squares={gameHistory[gameIndex]} onSquareClick={onSquareClick} />
+      <Board winnerInfo={winnerInfo} squares={currentSquares} onSquareClick={onSquareClick} />
       <History />
     </div>
   );
