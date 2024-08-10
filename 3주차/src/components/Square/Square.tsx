@@ -6,8 +6,10 @@ interface SquarePropsType {
 }
 
 const Square = ({ children, onClick }: SquarePropsType) => {
+  const isDisabled = !!children;
+
   return (
-    <button className={CSS.component} onClick={onClick}>
+    <button className={CSS.component} disabled={isDisabled} onClick={onClick}>
       {children}
     </button>
   );
