@@ -1,0 +1,23 @@
+@use "./../utils/mixins" as mix;
+@use "./../utils/variables" as var;
+
+body *,
+body *::before,
+body *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var.$base-font-family;
+  line-height: normal;
+  margin: 0 auto;
+  background-color: var.$background;
+  @media (prefers-color-scheme: dark) {
+    background-color: var.$background-dark;
+  }
+}
+
+/* 숨김 콘텐츠 */
+.sr-only {
+  @include mix.a11yHidden;
+}

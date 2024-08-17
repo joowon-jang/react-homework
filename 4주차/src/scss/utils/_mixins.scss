@@ -1,0 +1,76 @@
+@use "sass:string";
+@use "sass:map";
+@use "sass:list";
+@use "sass:color";
+
+// 숨김 콘텐츠
+@mixin a11yHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  clip-path: polygon(0 0, 0 0, 0 0);
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Flexbox
+@mixin flexbox($direction: row, $wrap: nowrap, $justify: null, $align: null, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+// Gridbox
+@mixin gridbox($column-count, $row-count: auto, $column-gap: null, $row-gap: null) {
+  display: grid;
+  grid-template-columns: repeat($column-count, 1fr);
+  grid-template-rows: repeat($row-count, 1fr);
+  gap: $row-gap $column-gap;
+}
+
+// Absolute
+@mixin absolute($top: null, $bottom: null, $left: null, $right: null) {
+  position: absolute;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+}
+
+// 미디어쿼리 중단점
+$breakpoints: (
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  2xl: 1536,
+);
+
+// 미디어쿼리 믹스인
+@mixin mq($breakpoint) {
+  @each $key, $value in $breakpoints {
+    @if not map.has-key($breakpoints, $breakpoint) {
+      @error '#{$breakpoint}는 유효한 중단점이 아닙니다.(유효한 값:sm, md, lg, xl, 2xl)';
+    }
+  }
+
+  $viewport: map.get($breakpoints, $breakpoint);
+  $query: string.unquote("min-width: #{$viewport}px");
+
+  @media ($query) {
+    @content;
+  }
+}
+
+@mixin mode($mode) {
+  @media (prefers-color-scheme: '#{$mode}') {
+    @content;
+  }
+}
