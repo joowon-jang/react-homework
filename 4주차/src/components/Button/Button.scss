@@ -16,6 +16,7 @@ $button-disabled-label: $color-gray-300;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 
   &--primary {
     background-color: $button-background;
@@ -30,6 +31,7 @@ $button-disabled-label: $color-gray-300;
   &--disabled {
     background-color: $button-disabled-background;
     color: $button-disabled-label;
+    cursor: not-allowed;
   }
 
   @media (prefers-color-scheme: dark) {
