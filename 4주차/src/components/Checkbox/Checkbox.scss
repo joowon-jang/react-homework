@@ -1,0 +1,27 @@
+@use "../../scss/utils" as *;
+
+$checkbox-size: 20px;
+
+$checkbox-active: $color-blue;
+$checkbox-deactive: $color-gray-200;
+$checkbox-deactive-dark: $color-gray-300;
+
+.checkbox {
+  &-input {
+    appearance: none;
+
+    width: $checkbox-size;
+    height: $checkbox-size;
+    border-radius: 9999px;
+    border: 2px solid $checkbox-deactive;
+
+    &:checked {
+      border-color: $checkbox-active;
+
+      background-color: $checkbox-active;
+      background-image: url("/Checkbox/check-true.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}

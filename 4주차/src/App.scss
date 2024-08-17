@@ -1,0 +1,6 @@
+@use "./scss/utils" as *;
+
+div {
+  margin: 10px;
+  @include flexbox($gap: 10px);
+}
