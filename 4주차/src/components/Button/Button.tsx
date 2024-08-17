@@ -2,7 +2,7 @@ import "./Button.scss";
 
 interface ButtonPropsType {
   children: string;
-  type: string;
+  type: "primary" | "secondary" | "disabled";
 }
 
 const Button = ({ children, type }: ButtonPropsType) => {

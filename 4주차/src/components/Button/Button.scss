@@ -12,6 +12,8 @@ $button-disabled-background-dark: $color-gray-500;
 $button-disabled-label: $color-gray-300;
 
 .button {
+  height: fit-content;
+
   padding: 18px 20px;
   border-radius: 12px;
   font-size: 16px;
