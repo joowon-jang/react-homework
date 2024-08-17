@@ -2,8 +2,8 @@ import "./App.scss";
 import Button from "./components/Button/Button";
 import Checkbox from "./components/Checkbox/Checkbox";
 import Archive from "./components/Archive/Archive";
-import Logo from "./components/Logo/Logo";
 import Status from "./components/Status/Status";
+import Logo from "./components/Logo/Logo";
 
 function App() {
   return (
@@ -29,6 +29,8 @@ function App() {
           <Status count={2}>모두</Status>
         </li>
       </ul>
+      <Logo type="mono" />
+      <Logo type="stereo" />
     </div>
   );
 }
