@@ -1,0 +1,43 @@
+@use "../../scss/utils" as *;
+
+$button-background: $color-blue;
+$button-label: $color-lightblue;
+
+$button-secondary-background: $color-lightblue;
+$button-secondary-label: $color-blue;
+$button-secondary-label-dark: $color-dodgerblue;
+
+$button-disabled-background: $color-gray-200;
+$button-disabled-background-dark: $color-gray-500;
+$button-disabled-label: $color-gray-300;
+
+.button {
+  padding: 18px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+
+  &__primary {
+    background-color: $button-background;
+    color: $button-label;
+  }
+
+  &__secondary {
+    background-color: $button-secondary-background;
+    color: $button-secondary-label;
+  }
+
+  &__disabled {
+    background-color: $button-disabled-background;
+    color: $button-disabled-label;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &__secondary {
+      color: $button-secondary-label-dark;
+    }
+    &__disabled {
+      background-color: $button-disabled-background-dark;
+    }
+  }
+}
