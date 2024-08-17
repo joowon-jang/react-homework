@@ -4,6 +4,7 @@ import Checkbox from "./components/Checkbox/Checkbox";
 import Archive from "./components/Archive/Archive";
 import Status from "./components/Status/Status";
 import Logo from "./components/Logo/Logo";
+import Input from "./components/Input/Input";
 
 function App() {
   return (
@@ -29,8 +30,7 @@ function App() {
           <Status count={2}>모두</Status>
         </li>
       </ul>
-      <Logo type="mono" />
-      <Logo type="stereo" />
+      <Input placeholder="오늘 할 일 제목" />
     </div>
   );
 }

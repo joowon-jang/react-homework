@@ -1,0 +1,43 @@
+@use "../../scss/utils" as *;
+
+$input-normal: $color-gray-300;
+$input-normal-dark: $color-gray-400;
+
+$input-focus: $color-blue;
+$input-focus-dark: $color-white;
+
+.input {
+  @include flexbox($align: center);
+  padding: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 2px solid $input-normal;
+
+  &::placeholder {
+    color: $input-normal;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid $input-focus;
+
+    &::placeholder {
+      color: $input-focus;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $background-dark;
+    border-color: $input-normal;
+    &::placeholder {
+      color: $input-normal-dark;
+    }
+
+    &:focus {
+      border-color: $input-focus-dark;
+      &::placeholder {
+        color: $input-focus-dark;
+      }
+    }
+  }
+}
