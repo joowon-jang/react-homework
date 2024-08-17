@@ -6,8 +6,9 @@ $input-normal-dark: $color-gray-400;
 $input-focus: $color-blue;
 $input-focus-dark: $color-white;
 
-.input {
+.text-input {
   @include flexbox($align: center);
+  width: 242px;
   padding: 4px;
   font-size: 14px;
   font-weight: 500;
@@ -40,4 +41,9 @@ $input-focus-dark: $color-white;
       }
     }
   }
+}
+
+.textarea {
+  min-height: $space-5-half;
+  max-height: 132px;
 }
