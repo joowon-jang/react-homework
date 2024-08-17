@@ -13,6 +13,7 @@ $archive-deactive-dark: $color-gray-300;
     width: $archive-size;
     height: $archive-size;
     background-image: url("/Archive/archive-false.svg");
+    cursor: pointer;
 
     &:checked {
       border-color: $archive-active;

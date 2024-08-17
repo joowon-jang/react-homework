@@ -11,6 +11,7 @@ $status-deactive: $color-gray-300;
     color: $status-deactive;
     font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
   }
 
   &__input {

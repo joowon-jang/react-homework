@@ -14,6 +14,7 @@ $checkbox-deactive-dark: $color-gray-300;
     height: $checkbox-size;
     border-radius: 9999px;
     border: 2px solid $checkbox-deactive;
+    cursor: pointer;
 
     &:checked {
       border-color: $checkbox-active;
