@@ -1,0 +1,21 @@
+@use "../../scss/utils" as *;
+
+$select-forground: $color-gray-300;
+
+$select-background: $color-white;
+$select-background-dark: $color-black;
+
+$select-selected: $color-blue;
+
+$select-border: $color-gray-200;
+$select-border-dark: $color-gray-400;
+
+.select {
+  @include flexbox($align: center, $gap: 8px);
+  padding: $space-1-half $space-1-half $space-1-half 8px;
+  border-radius: $space-1-half;
+  border: 1px solid $select-border;
+  width: 60px;
+
+  color: $select-selected;
+}

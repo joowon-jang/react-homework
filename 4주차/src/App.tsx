@@ -7,6 +7,7 @@ import Logo from "./components/Logo/Logo";
 import TextInput from "./components/TextInput/TextInput";
 import Time from "./components/Time/Time";
 import DoIt from "./components/DoIt/DoIt";
+import Select from "./components/Select/Select";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           endTime: "09:00",
         }}
       />
+      <Select />
     </div>
   );
 }
