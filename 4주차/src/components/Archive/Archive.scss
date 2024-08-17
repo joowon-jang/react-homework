@@ -1,0 +1,25 @@
+@use "../../scss/utils" as *;
+
+$archive-size: 20px;
+
+$archive-active: $color-blue;
+$archive-deactive: $color-gray-200;
+$archive-deactive-dark: $color-gray-300;
+
+.archive {
+  &-input {
+    appearance: none;
+
+    width: $archive-size;
+    height: $archive-size;
+    background-image: url("/Archive/archive-false.svg");
+
+    &:checked {
+      border-color: $archive-active;
+
+      background-image: url("/Archive/archive-true.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}
