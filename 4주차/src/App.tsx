@@ -6,6 +6,7 @@ import Status from "./components/Status/Status";
 import Logo from "./components/Logo/Logo";
 import TextInput from "./components/TextInput/TextInput";
 import Time from "./components/Time/Time";
+import DoIt from "./components/DoIt/DoIt";
 
 function App() {
   return (
@@ -37,6 +38,15 @@ function App() {
         placeholder="오늘 할 일 내용을 입력합니다. 할 일 내용은 가급적 간결하고 이해하기 쉽게 요약해서 작성합니다."
       />
       <Time />
+      <DoIt
+        content={{
+          title: "할 일",
+          description: "할 일 내용을 작성합니다.",
+          noon: "오전",
+          startTime: "07:30",
+          endTime: "09:00",
+        }}
+      />
     </div>
   );
 }
