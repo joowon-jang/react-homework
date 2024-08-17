@@ -1,0 +1,9 @@
+@use "../../scss/utils" as *;
+
+$divider-color: $color-gray-200;
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: $divider-color;
+}

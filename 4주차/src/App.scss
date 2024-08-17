@@ -1,10 +1,10 @@
 @use "./scss/utils" as *;
 
-div {
-  margin: 10px;
-  @include flexbox($direction: column, $gap: 10px);
-}
+#app {
+  @include flexbox($direction: column, $gap: 15px);
+  margin: 30px;
 
-ul {
-  @include flexbox();
+  ul {
+    @include flexbox($gap: 5px);
+  }
 }
