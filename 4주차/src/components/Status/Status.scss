@@ -1,0 +1,42 @@
+@use "../../scss/utils" as *;
+
+$status-active: $color-blue;
+$status-deactive: $color-gray-300;
+
+.status {
+  @include flexbox($align: center);
+
+  &__label {
+    @include flexbox($align: center, $gap: 4px);
+    color: $status-deactive;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__input {
+    appearance: none;
+
+    &:checked ~ .status__label {
+      color: $status-active;
+    }
+    &:checked ~ .status__label > .status__count {
+      background-color: $status-active;
+    }
+  }
+
+  &__count {
+    @include flexbox($justify: center, $align: center);
+    padding: 2px 4px;
+    color: $background;
+    background-color: $status-deactive;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &__count {
+      color: $background-dark;
+    }
+  }
+}

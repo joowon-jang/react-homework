@@ -2,5 +2,9 @@
 
 div {
   margin: 10px;
-  @include flexbox($gap: 10px);
+  @include flexbox($direction: column, $gap: 10px);
+}
+
+ul {
+  @include flexbox();
 }

@@ -3,6 +3,7 @@ import Button from "./components/Button/Button";
 import Checkbox from "./components/Checkbox/Checkbox";
 import Archive from "./components/Archive/Archive";
 import Logo from "./components/Logo/Logo";
+import Status from "./components/Status/Status";
 
 function App() {
   return (
@@ -14,6 +15,20 @@ function App() {
       <Archive />
       <Logo type="mono" />
       <Logo type="stereo" />
+      <ul>
+        <li>
+          <Status count={3}>모두</Status>
+        </li>
+        <li>
+          <Status count={0}>모두</Status>
+        </li>
+        <li>
+          <Status count={1}>모두</Status>
+        </li>
+        <li>
+          <Status count={2}>모두</Status>
+        </li>
+      </ul>
     </div>
   );
 }
