@@ -6,7 +6,7 @@ interface ButtonPropsType {
 }
 
 const Button = ({ children, type }: ButtonPropsType) => {
-  return <button className={`button button__${type}`}>{children}</button>;
+  return <button className={`button button--${type}`}>{children}</button>;
 };
 
 export default Button;

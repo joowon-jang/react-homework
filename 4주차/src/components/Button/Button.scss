@@ -17,26 +17,26 @@ $button-disabled-label: $color-gray-300;
   font-size: 16px;
   font-weight: 700;
 
-  &__primary {
+  &--primary {
     background-color: $button-background;
     color: $button-label;
   }
 
-  &__secondary {
+  &--secondary {
     background-color: $button-secondary-background;
     color: $button-secondary-label;
   }
 
-  &__disabled {
+  &--disabled {
     background-color: $button-disabled-background;
     color: $button-disabled-label;
   }
 
   @media (prefers-color-scheme: dark) {
-    &__secondary {
+    &--secondary {
       color: $button-secondary-label-dark;
     }
-    &__disabled {
+    &--disabled {
       background-color: $button-disabled-background-dark;
     }
   }
