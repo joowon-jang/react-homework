@@ -1,0 +1,32 @@
+@use "../../scss/utils" as *;
+
+$time-normal: $color-gray-300;
+$time-normal-dark: $color-gray-400;
+$time-focus: $color-blue;
+$time-focus-dark: $color-dodgerblue;
+
+.time {
+  @include flexbox($gap: 6px, $align: center);
+
+  &__input {
+    width: 47px;
+    padding: 4px;
+    border-bottom: 1px solid $time-normal;
+    font-size: 14px;
+    line-height: 150%;
+
+    &::placeholder {
+      text-align: center;
+      color: $time-normal;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $time-focus;
+
+      &::placeholder {
+        color: $time-focus;
+      }
+    }
+  }
+}
