@@ -1,5 +1,6 @@
 {
-  "name": "4-",
+  "name": "week4",
+  "description": "테킷 프론트엔드스쿨 10기 리액트 과제 저장소 - 4주차",
   "private": true,
   "version": "0.0.0",
   "type": "module",
