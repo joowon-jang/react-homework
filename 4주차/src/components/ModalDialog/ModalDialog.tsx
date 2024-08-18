@@ -51,10 +51,10 @@ const ModalDialog = ({ isOpen, onSubmit, onClose }: ModalDialogPropsType) => {
         </fieldset>
 
         <div className="modal-content-form-button-wrapper">
-          <Button modifier="primary" type="submit" onClick={onSubmit}>
+          <Button modifier="primary" type="submit" onClick={onSubmit} style={{ flexGrow: 1 }}>
             저장
           </Button>
-          <Button modifier="secondary" onClick={onClose}>
+          <Button modifier="secondary" onClick={onClose} style={{ flexGrow: 1 }}>
             취소
           </Button>
         </div>
