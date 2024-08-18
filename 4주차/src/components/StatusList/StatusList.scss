@@ -1,0 +1,6 @@
+@use "../../scss/utils" as *;
+
+.status-list {
+  @include flexbox($align: center, $gap: 16px);
+  margin-bottom: 22px;
+}
