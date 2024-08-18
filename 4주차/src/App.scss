@@ -8,6 +8,7 @@ $text-date-dark: $color-gray-300;
 .doit-app {
   @include flexbox($direction: column, $align: center);
   margin-top: 90px;
+  padding: 0 30px;
 
   &__title {
     font-size: 24px;
@@ -30,6 +31,7 @@ $text-date-dark: $color-gray-300;
 
   &-doit-list {
     @include flexbox($direction: column, $gap: 20px);
+    width: 100%;
     padding: 10px;
   }
 }

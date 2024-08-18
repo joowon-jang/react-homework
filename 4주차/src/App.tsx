@@ -9,8 +9,24 @@ import DoIt from "./components/DoIt/DoIt";
 import Divider from "./components/Divider/Divider";
 import ModalDialog from "./components/ModalDialog/ModalDialog";
 
+interface todoListType {
+  id: string;
+  title: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+}
+
+const ENDPOINT = import.meta.env.VITE_PB_URL + "/api/collections/todoItem/records/";
+
+function LoadingMessage() {
+  return <p>데이터 로딩 중...</p>;
+}
+
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [todoList, setTodoList] = useState<todoListType[]>([]);
 
   const dateOfToday = new Date();
 
@@ -18,10 +34,36 @@ function App() {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
+    let ignore = false;
+    setIsLoading(true);
+
+    // todoList 불러오기
+    const fetchTodoList = async () => {
+      const response = await fetch(ENDPOINT);
+
+      if (response.ok) {
+        if (!ignore) {
+          const responseData = await response.json();
+          setTodoList(responseData.items);
+          console.log(responseData.items);
+        }
+      } else {
+        console.error("알 수 없는 오류로 데이터를 불러오지 못했습니다.");
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchTodoList();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
     }
     return () => {
       document.body.style.overflow = "auto";
@@ -58,39 +100,24 @@ function App() {
       </ul>
 
       <ul className="doit-app-doit-list">
-        <li>
-          <DoIt
-            content={{
-              title: "동네 주민 모임",
-              description: "동네 주민 정기 모임일. 저녁 식사 후, 모임 회의 가질 예정.",
-              noon: "오후",
-              startTime: "07:00",
-              endTime: "09:30",
-            }}
-          />
-        </li>
-        <li>
-          <DoIt
-            content={{
-              title: "동네 주민 모임",
-              description: "동네 주민 정기 모임일. 저녁 식사 후, 모임 회의 가질 예정.",
-              noon: "오후",
-              startTime: "07:00",
-              endTime: "09:30",
-            }}
-          />
-        </li>
-        <li>
-          <DoIt
-            content={{
-              title: "동네 주민 모임",
-              description: "동네 주민 정기 모임일. 저녁 식사 후, 모임 회의 가질 예정.",
-              noon: "오후",
-              startTime: "07:00",
-              endTime: "09:30",
-            }}
-          />
-        </li>
+        {isLoading ? (
+          <LoadingMessage />
+        ) : (
+          todoList.map((listItem) => {
+            return (
+              <li key={listItem.id}>
+                <DoIt
+                  content={{
+                    title: listItem.title,
+                    description: listItem.description,
+                    startTime: new Date(listItem.startTime),
+                    endTime: new Date(listItem.endTime),
+                  }}
+                />
+              </li>
+            );
+          })
+        )}
       </ul>
 
       <ModalDialog isOpen={isModalOpen} onClose={closeModal} />
