@@ -1,10 +1,35 @@
 @use "./scss/utils" as *;
 
-#app {
-  @include flexbox($direction: column, $gap: 15px);
-  margin: 30px;
+$text-headline: $forground;
 
-  ul {
-    @include flexbox($gap: 5px);
+$text-date: $color-gray-400;
+$text-date-dark: $color-gray-300;
+
+.doit-app {
+  @include flexbox($direction: column, $align: center);
+  margin-top: 90px;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $forground;
+    margin-bottom: 8px;
+  }
+
+  &__date {
+    font-size: 12px;
+    font-weight: 600;
+    color: $text-date;
+    margin-bottom: 27px;
+  }
+
+  &-status-list {
+    @include flexbox($align: center, $gap: 16px);
+    margin-bottom: 22px;
+  }
+
+  &-doit-list {
+    @include flexbox($direction: column, $gap: 20px);
+    padding: 10px;
   }
 }
