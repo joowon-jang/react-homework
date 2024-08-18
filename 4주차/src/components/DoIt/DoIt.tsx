@@ -5,12 +5,7 @@ import Divider from "../Divider/Divider";
 import "./DoIt.scss";
 
 interface DoItPropsType {
-  content: {
-    title: string;
-    description: string;
-    startTime: Date;
-    endTime: Date;
-  };
+  content: DoItType;
 }
 
 const DoIt = ({ content }: DoItPropsType) => {
