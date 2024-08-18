@@ -1,41 +1,22 @@
 import { FormEvent, useEffect, useState } from "react";
 import "./App.scss";
-import Logo from "./components/Logo/Logo";
-import formatDate from "./utils/formatDate";
 import Button from "./components/Button/Button";
-import PlusImage from "/plus.svg";
-import Status from "./components/Status/Status";
 import DoIt from "./components/DoIt/DoIt";
-import Divider from "./components/Divider/Divider";
+import Logo from "./components/Logo/Logo";
 import ModalDialog from "./components/ModalDialog/ModalDialog";
+import StatusList from "./components/StatusList/StatusList";
 import ENDPOINT from "./constants";
+import formatDate from "./utils/formatDate";
 import timeStringToDate from "./utils/timeStringToDate";
-
-interface todoListType {
-  id: string;
-  title: string;
-  description: string;
-  startTime: string;
-  endTime: string;
-}
-
-function LoadingMessage() {
-  return <p>데이터 로딩 중...</p>;
-}
-
-function PrintError({ error }: { error: Error }) {
-  return (
-    <p role="alert">
-      오류 발생! <span style={{ fontWeight: 500, color: "red" }}>"{error.message}"</span>
-    </p>
-  );
-}
+import PlusImage from "/plus.svg";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [todoList, setTodoList] = useState<todoListType[]>([]);
+  const [todoList, setTodoList] = useState<TodoListType[]>([]);
+  const [status, setStatus] = useState<StatusType>("모두");
+  const [filteredList, setFilteredList] = useState<TodoListType[]>(todoList);
 
   const dateOfToday = new Date();
 
@@ -83,7 +64,31 @@ function App() {
     };
   }, [isModalOpen]);
 
-  const createItem = async (bodyData: object) => {
+  useEffect(() => {
+    switch (status) {
+      case "모두":
+        setFilteredList(todoList);
+        break;
+      case "할일":
+        setFilteredList(todoList.filter((item) => !item.done));
+        break;
+      case "한일":
+        setFilteredList(todoList.filter((item) => item.done));
+        break;
+      case "보관":
+        setFilteredList(todoList.filter((item) => item.archived));
+        break;
+
+      default:
+        break;
+    }
+  }, [status, todoList]);
+
+  const handleStatus = (status: StatusType) => () => {
+    setStatus(status);
+  };
+
+  const handleCreate = async (bodyData: object) => {
     const response = await fetch(ENDPOINT, {
       method: "POST",
       headers: {
@@ -118,7 +123,7 @@ function App() {
       endTime: timeStringToDate(endTime, noon as NoonType).toISOString(),
     };
 
-    createItem(bodyData)
+    handleCreate(bodyData)
       .then((res) => {
         setTodoList([...todoList, res]);
         closeModal();
@@ -128,19 +133,52 @@ function App() {
       });
   };
 
+  const handleUpdate = async (
+    index: number,
+    id: string,
+    { done, archived }: { done?: boolean; archived?: boolean }
+  ) => {
+    const url = `${ENDPOINT}${id}`;
+
+    // 낙관적 업데이트
+    setTodoList((prevList) => {
+      const newList = prevList.slice();
+      if (done !== undefined) newList[index].done = done;
+      if (archived !== undefined) newList[index].archived = archived;
+
+      console.log(done, archived);
+
+      return newList;
+    });
+
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ done, archived }),
+    });
+    const responseData = await response.json();
+
+    console.log(responseData);
+  };
+
   const renderTodoList = () => {
     if (isLoading) return <LoadingMessage />;
     if (error) return <PrintError error={error} />;
-    return todoList.map((listItem) => {
+    return filteredList.map(({ id, title, description, startTime, endTime, done, archived }, index) => {
       return (
-        <li key={listItem.id}>
+        <li key={id}>
           <DoIt
             content={{
-              title: listItem.title,
-              description: listItem.description,
-              startTime: new Date(listItem.startTime),
-              endTime: new Date(listItem.endTime),
+              title,
+              description,
+              startTime: new Date(startTime),
+              endTime: new Date(endTime),
+              done,
+              archived,
             }}
+            onUpdate={handleUpdate.bind(null, index, id)}
           />
         </li>
       );
@@ -158,28 +196,26 @@ function App() {
         <img src={PlusImage} alt="플러스" /> 생각났어?
       </Button>
 
-      <ul className="doit-app-status-list">
-        <li>
-          <Status count={todoList.length} defaultChecked={true}>
-            모두
-          </Status>
-        </li>
-        <Divider type="vertical" style={{ height: "12px" }} />
-        <li>
-          <Status count={0}>할일</Status>
-        </li>
-        <li>
-          <Status count={0}>한일</Status>
-        </li>
-        <li>
-          <Status count={0}>보관</Status>
-        </li>
-      </ul>
+      <StatusList list={todoList} onChange={handleStatus} />
 
       <ul className="doit-app-doit-list">{renderTodoList()}</ul>
 
       <ModalDialog isOpen={isModalOpen} onSubmit={handleSubmit} onClose={closeModal} />
     </div>
+  );
+}
+
+/* ----------------------------------------------------------------------- */
+
+function LoadingMessage() {
+  return <p>데이터 로딩 중...</p>;
+}
+
+function PrintError({ error }: { error: Error }) {
+  return (
+    <p role="alert">
+      오류 발생! <span style={{ fontWeight: 500, color: "red" }}>"{error.message}"</span>
+    </p>
   );
 }
 
