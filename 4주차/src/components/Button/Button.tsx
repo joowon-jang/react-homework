@@ -2,12 +2,14 @@ import "./Button.scss";
 
 interface ButtonPropsType {
   children: string;
-  type: "primary" | "secondary" | "disabled";
+  modifier: "primary" | "secondary" | "disabled";
+  type?: "submit" | "button" | "reset";
+  onClick?: () => void;
 }
 
-const Button = ({ children, type }: ButtonPropsType) => {
+const Button = ({ children, modifier, type = "button", onClick }: ButtonPropsType) => {
   return (
-    <button className={`button button--${type}`} disabled={type === "disabled"}>
+    <button type={type} onClick={onClick} className={`button button--${modifier}`} disabled={modifier === "disabled"}>
       {children}
     </button>
   );
