@@ -7,12 +7,13 @@ import Time from "../Time/Time";
 import "./ModalDialog.scss";
 
 interface ModalDialogPropsType {
+  isLoading: boolean;
   isOpen: boolean;
   onSubmit?: (e: FormEvent) => void;
   onClose: () => void;
 }
 
-const ModalDialog = ({ isOpen, onSubmit, onClose }: ModalDialogPropsType) => {
+const ModalDialog = ({ isLoading, isOpen, onSubmit, onClose }: ModalDialogPropsType) => {
   const titleId = useId();
   const descriptionId = useId();
 
@@ -51,10 +52,10 @@ const ModalDialog = ({ isOpen, onSubmit, onClose }: ModalDialogPropsType) => {
         </fieldset>
 
         <div className="modal-content-form-button-wrapper">
-          <Button modifier="primary" type="submit" style={{ flexGrow: 1 }}>
+          <Button modifier={isLoading ? "disabled" : "primary"} type="submit" style={{ flexGrow: 1 }}>
             저장
           </Button>
-          <Button modifier="secondary" onClick={onClose} style={{ flexGrow: 1 }}>
+          <Button modifier={isLoading ? "disabled" : "secondary"} onClick={onClose} style={{ flexGrow: 1 }}>
             취소
           </Button>
         </div>

@@ -88,6 +88,8 @@ function App() {
   };
 
   const handleCreate = async (bodyData: object) => {
+    setIsLoading(true);
+
     const response = await fetch(ENDPOINT, {
       method: "POST",
       headers: {
@@ -98,8 +100,10 @@ function App() {
     const responseData = await response.json();
 
     if (response.ok) {
+      setIsLoading(false);
       return responseData;
     } else {
+      setIsLoading(false);
       throw new Error(responseData.message);
     }
   };
@@ -148,6 +152,8 @@ function App() {
       return newList;
     });
 
+    setIsLoading(true);
+
     await fetch(url, {
       method: "PATCH",
       headers: {
@@ -155,6 +161,8 @@ function App() {
       },
       body: JSON.stringify({ done, archived }),
     });
+
+    setIsLoading(false);
   };
 
   const renderTodoList = () => {
@@ -186,7 +194,7 @@ function App() {
       <h1 className="doit-app__title">우리, 오늘 뭐할까?</h1>
       <time className="doit-app__date">{formatDate(dateOfToday)}</time>
 
-      <Button modifier="primary" onClick={openModal} style={{ marginBottom: "32px" }}>
+      <Button modifier={isLoading ? "disabled" : "primary"} onClick={openModal} style={{ marginBottom: "32px" }}>
         <img src={PlusImage} alt="플러스" /> 생각났어?
       </Button>
 
@@ -194,7 +202,7 @@ function App() {
 
       <ul className="doit-app-doit-list">{renderTodoList()}</ul>
 
-      <ModalDialog isOpen={isModalOpen} onSubmit={handleSubmit} onClose={closeModal} />
+      <ModalDialog isLoading={isLoading} isOpen={isModalOpen} onSubmit={handleSubmit} onClose={closeModal} />
     </div>
   );
 }
