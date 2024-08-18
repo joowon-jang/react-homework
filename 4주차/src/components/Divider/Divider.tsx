@@ -3,10 +3,11 @@ import "./Divider.scss";
 
 interface DividerPropsType {
   style?: CSSProperties;
+  type?: "vertical" | "horizental";
 }
 
-const Divider = ({ style }: DividerPropsType) => {
-  return <div style={style} className="divider"></div>;
+const Divider = ({ style, type = "horizental" }: DividerPropsType) => {
+  return <div style={style} className={`divider divider--${type}`}></div>;
 };
 
 export default Divider;
