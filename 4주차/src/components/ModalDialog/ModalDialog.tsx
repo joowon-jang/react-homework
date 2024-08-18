@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { FormEvent, useId } from "react";
 import ReactModal from "react-modal";
 import Button from "../Button/Button";
 import Select from "../Select/Select";
@@ -8,7 +8,7 @@ import "./ModalDialog.scss";
 
 interface ModalDialogPropsType {
   isOpen: boolean;
-  onSubmit?: () => void;
+  onSubmit?: (e: FormEvent) => void;
   onClose: () => void;
 }
 
@@ -23,7 +23,7 @@ const ModalDialog = ({ isOpen, onSubmit, onClose }: ModalDialogPropsType) => {
       contentLabel="등록할 오늘 할 일을 입력하세요."
       overlayClassName="modal-overlay"
       className="modal-content">
-      <form className="modal-content-form">
+      <form className="modal-content-form" onSubmit={onSubmit}>
         <div>
           <label htmlFor={titleId} className="modal-content-form__label">
             오늘 뭐할래?
@@ -51,7 +51,7 @@ const ModalDialog = ({ isOpen, onSubmit, onClose }: ModalDialogPropsType) => {
         </fieldset>
 
         <div className="modal-content-form-button-wrapper">
-          <Button modifier="primary" type="submit" onClick={onSubmit} style={{ flexGrow: 1 }}>
+          <Button modifier="primary" type="submit" style={{ flexGrow: 1 }}>
             저장
           </Button>
           <Button modifier="secondary" onClick={onClose} style={{ flexGrow: 1 }}>

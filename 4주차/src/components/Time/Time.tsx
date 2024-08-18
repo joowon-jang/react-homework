@@ -14,6 +14,7 @@ const Time = () => {
       <input
         id={startId}
         type="text"
+        name="start-time"
         placeholder="00:00"
         maxLength={5}
         pattern="(0[0-9]|1[0-1]):([0-5][0-9])"
@@ -27,6 +28,7 @@ const Time = () => {
       <input
         id={endId}
         type="text"
+        name="end-time"
         placeholder="00:00"
         maxLength={5}
         pattern="(0[0-9]|1[0-1]):([0-5][0-9])"

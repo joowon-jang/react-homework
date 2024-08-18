@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import "./App.scss";
 import Logo from "./components/Logo/Logo";
 import formatDate from "./utils/formatDate";
@@ -8,6 +8,8 @@ import Status from "./components/Status/Status";
 import DoIt from "./components/DoIt/DoIt";
 import Divider from "./components/Divider/Divider";
 import ModalDialog from "./components/ModalDialog/ModalDialog";
+import ENDPOINT from "./constants";
+import timeStringToDate from "./utils/timeStringToDate";
 
 interface todoListType {
   id: string;
@@ -16,8 +18,6 @@ interface todoListType {
   startTime: string;
   endTime: string;
 }
-
-const ENDPOINT = import.meta.env.VITE_PB_URL + "/api/collections/todoItem/records/";
 
 function LoadingMessage() {
   return <p>데이터 로딩 중...</p>;
@@ -83,6 +83,51 @@ function App() {
     };
   }, [isModalOpen]);
 
+  const createItem = async (bodyData: object) => {
+    const response = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bodyData),
+    });
+    const responseData = await response.json();
+
+    if (response.ok) {
+      return responseData;
+    } else {
+      throw new Error(responseData.message);
+    }
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+
+    const title = formData.get("text-input");
+    const description = formData.get("textarea-input");
+    const noon = formData.get("noon");
+    const startTime = String(formData.get("start-time"));
+    const endTime = String(formData.get("end-time"));
+
+    const bodyData = {
+      title,
+      description,
+      startTime: timeStringToDate(startTime, noon as NoonType).toISOString(),
+      endTime: timeStringToDate(endTime, noon as NoonType).toISOString(),
+    };
+
+    createItem(bodyData)
+      .then((res) => {
+        setTodoList([...todoList, res]);
+        closeModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const renderTodoList = () => {
     if (isLoading) return <LoadingMessage />;
     if (error) return <PrintError error={error} />;
@@ -133,7 +178,7 @@ function App() {
 
       <ul className="doit-app-doit-list">{renderTodoList()}</ul>
 
-      <ModalDialog isOpen={isModalOpen} onClose={closeModal} />
+      <ModalDialog isOpen={isModalOpen} onSubmit={handleSubmit} onClose={closeModal} />
     </div>
   );
 }
