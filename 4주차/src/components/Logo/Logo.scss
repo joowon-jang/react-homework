@@ -1,6 +1,11 @@
 @use "../../scss/utils" as *;
 
 .logo {
-  width: 146px;
-  height: 76px;
+  color: #00050E;
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    color: #ffffff;
+  }
 }

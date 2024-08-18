@@ -17,5 +17,11 @@ $select-border-dark: $color-gray-400;
   border: 1px solid $select-border;
   width: 60px;
 
+  background-color: $select-background;
   color: $select-selected;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $select-background-dark;
+    border-color: $select-border-dark;
+  }
 }

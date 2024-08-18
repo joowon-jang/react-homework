@@ -24,14 +24,15 @@ $text-date-dark: $color-gray-300;
     margin-bottom: 27px;
   }
 
-  &-status-list {
-    @include flexbox($align: center, $gap: 16px);
-    margin-bottom: 22px;
-  }
-
   &-doit-list {
     @include flexbox($direction: column, $gap: 20px);
     width: 100%;
     padding: 10px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &__title {
+      color: $forground-dark;
+    }
   }
 }

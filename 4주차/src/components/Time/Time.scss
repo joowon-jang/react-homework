@@ -9,6 +9,7 @@ $time-focus-dark: $color-dodgerblue;
   @include flexbox($gap: 6px, $align: center);
 
   &__input {
+    background-color: transparent;
     width: 47px;
     padding: 4px;
     border-bottom: 1px solid $time-normal;
@@ -26,6 +27,20 @@ $time-focus-dark: $color-dodgerblue;
 
       &::placeholder {
         color: $time-focus;
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &::placeholder {
+      color: $time-normal-dark;
+    }
+
+    &:focus {
+      border-color: $time-focus-dark;
+
+      &::placeholder {
+        color: $time-focus-dark;
       }
     }
   }

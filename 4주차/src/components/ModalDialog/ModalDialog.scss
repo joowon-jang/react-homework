@@ -13,6 +13,10 @@ $dialog-title: $color-blue;
   height: 100vh;
   background-color: $dim-background;
   backdrop-filter: blur(2px);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $dim-background-dark;
+  }
 }
 
 .modal-content {
@@ -41,5 +45,9 @@ $dialog-title: $color-blue;
       width: 100%;
       @include flexbox($gap: 8px);
     }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $dialog-background-dark;
   }
 }
