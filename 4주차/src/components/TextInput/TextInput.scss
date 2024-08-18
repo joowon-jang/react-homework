@@ -8,7 +8,7 @@ $input-focus-dark: $color-white;
 
 .text-input {
   @include flexbox($align: center);
-  width: 242px;
+  width: 100%;
   padding: 4px;
   font-size: 14px;
   font-weight: 500;
