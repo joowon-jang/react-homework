@@ -36,7 +36,6 @@ function App() {
         if (response.ok) {
           if (!ignore) {
             setTodoList(responseData.items);
-            console.log(responseData.items);
           }
         } else {
           throw new Error(responseData.message);
@@ -146,21 +145,16 @@ function App() {
       if (done !== undefined) newList[index].done = done;
       if (archived !== undefined) newList[index].archived = archived;
 
-      console.log(done, archived);
-
       return newList;
     });
 
-    const response = await fetch(url, {
+    await fetch(url, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ done, archived }),
     });
-    const responseData = await response.json();
-
-    console.log(responseData);
   };
 
   const renderTodoList = () => {
