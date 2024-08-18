@@ -44,6 +44,15 @@
   right: $right;
 }
 
+// Fixed
+@mixin fixed($top: null, $bottom: null, $left: null, $right: null) {
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+}
+
 // 미디어쿼리 중단점
 $breakpoints: (
   sm: 640,

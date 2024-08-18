@@ -8,13 +8,33 @@ import TextInput from "./components/TextInput/TextInput";
 import Time from "./components/Time/Time";
 import DoIt from "./components/DoIt/DoIt";
 import Select from "./components/Select/Select";
+import ModalDialog from "./components/ModalDialog/ModalDialog";
+import { useEffect, useId, useState } from "react";
 
 function App() {
+  const id1 = useId();
+  const id2 = useId();
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
   return (
     <div id="app">
-      <Button type="primary">레이블</Button>
-      <Button type="secondary">레이블</Button>
-      <Button type="disabled">레이블</Button>
+      <Button modifier="primary">레이블</Button>
+      <Button modifier="secondary">레이블</Button>
+      <Button modifier="disabled">레이블</Button>
       <Checkbox />
       <Archive />
       <Logo type="mono" />
@@ -33,10 +53,11 @@ function App() {
           <Status count={2}>모두</Status>
         </li>
       </ul>
-      <TextInput type="text" placeholder="오늘 할 일 제목" />
+      <TextInput type="text" placeholder="오늘 할 일 제목" id={id1} />
       <TextInput
         type="textarea"
         placeholder="오늘 할 일 내용을 입력합니다. 할 일 내용은 가급적 간결하고 이해하기 쉽게 요약해서 작성합니다."
+        id={id2}
       />
       <Time />
       <DoIt
@@ -49,6 +70,7 @@ function App() {
         }}
       />
       <Select />
+      <ModalDialog isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }

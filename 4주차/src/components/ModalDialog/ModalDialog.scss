@@ -1,0 +1,45 @@
+@use "../../scss/utils" as *;
+
+$dim-background: #f9f9f926;
+$dim-background-dark: #ffffff1a;
+
+$dialog-background: $color-white;
+$dialog-background-dark: $color-black;
+$dialog-title: $color-blue;
+
+.modal-overlay {
+  @include fixed($top: 0);
+  width: 100vw;
+  height: 100vh;
+  background-color: $dim-background;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  @include fixed($bottom: 0);
+  width: 100%;
+  background-color: $dialog-background;
+  border-radius: $space-5 $space-5 0px 0px;
+  box-shadow: 0px -2px 6px 0px rgba(0, 4, 14, 0.1);
+  padding: $space-7-half;
+
+  &-form {
+    @include flexbox($direction: column, $gap: $space-6);
+
+    &__label {
+      color: $dialog-title;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    &-time {
+      @include flexbox($gap: 8px);
+      padding-block: 8px;
+    }
+
+    &-button-wrapper {
+      width: 100%;
+      @include flexbox($gap: 8px);
+    }
+  }
+}
