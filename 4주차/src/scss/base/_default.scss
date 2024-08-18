@@ -1,6 +1,9 @@
 @use "./../utils/mixins" as mix;
 @use "./../utils/variables" as var;
 
+$viewport: var.$color-gray-50;
+$viewport-dark: var.$color-black;
+
 body *,
 body *::before,
 body *::after {
@@ -11,9 +14,9 @@ body {
   font-family: var.$base-font-family;
   line-height: normal;
   margin: 0 auto;
-  background-color: var.$background;
+  background-color: $viewport;
   @media (prefers-color-scheme: dark) {
-    background-color: var.$background-dark;
+    background-color: $viewport-dark;
   }
 }
 
