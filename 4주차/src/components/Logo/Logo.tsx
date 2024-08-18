@@ -8,11 +8,7 @@ interface LogoPropsType {
 }
 
 const Logo = ({ type }: LogoPropsType) => {
-  return (
-    <h1 className="logo">
-      <img src={type === "mono" ? LogoMono : LogoStereo} alt="로고" />
-    </h1>
-  );
+  return <img src={type === "mono" ? LogoMono : LogoStereo} alt="로고" className="logo" />;
 };
 
 export default Logo;
