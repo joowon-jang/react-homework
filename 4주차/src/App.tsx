@@ -23,8 +23,17 @@ function LoadingMessage() {
   return <p>데이터 로딩 중...</p>;
 }
 
+function PrintError({ error }: { error: Error }) {
+  return (
+    <p role="alert">
+      오류 발생! <span style={{ fontWeight: 500, color: "red" }}>"{error.message}"</span>
+    </p>
+  );
+}
+
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [todoList, setTodoList] = useState<todoListType[]>([]);
 
@@ -40,15 +49,19 @@ function App() {
     // todoList 불러오기
     const fetchTodoList = async () => {
       const response = await fetch(ENDPOINT);
+      const responseData = await response.json();
 
-      if (response.ok) {
-        if (!ignore) {
-          const responseData = await response.json();
-          setTodoList(responseData.items);
-          console.log(responseData.items);
+      try {
+        if (response.ok) {
+          if (!ignore) {
+            setTodoList(responseData.items);
+            console.log(responseData.items);
+          }
+        } else {
+          throw new Error(responseData.message);
         }
-      } else {
-        console.error("알 수 없는 오류로 데이터를 불러오지 못했습니다.");
+      } catch (error) {
+        setError(error as Error);
       }
 
       setIsLoading(false);
@@ -70,6 +83,25 @@ function App() {
     };
   }, [isModalOpen]);
 
+  const renderTodoList = () => {
+    if (isLoading) return <LoadingMessage />;
+    if (error) return <PrintError error={error} />;
+    return todoList.map((listItem) => {
+      return (
+        <li key={listItem.id}>
+          <DoIt
+            content={{
+              title: listItem.title,
+              description: listItem.description,
+              startTime: new Date(listItem.startTime),
+              endTime: new Date(listItem.endTime),
+            }}
+          />
+        </li>
+      );
+    });
+  };
+
   return (
     <div id="app" className="doit-app">
       <Logo type="stereo" style={{ marginBottom: "44px" }} />
@@ -83,7 +115,7 @@ function App() {
 
       <ul className="doit-app-status-list">
         <li>
-          <Status count={0} defaultChecked={true}>
+          <Status count={todoList.length} defaultChecked={true}>
             모두
           </Status>
         </li>
@@ -99,26 +131,7 @@ function App() {
         </li>
       </ul>
 
-      <ul className="doit-app-doit-list">
-        {isLoading ? (
-          <LoadingMessage />
-        ) : (
-          todoList.map((listItem) => {
-            return (
-              <li key={listItem.id}>
-                <DoIt
-                  content={{
-                    title: listItem.title,
-                    description: listItem.description,
-                    startTime: new Date(listItem.startTime),
-                    endTime: new Date(listItem.endTime),
-                  }}
-                />
-              </li>
-            );
-          })
-        )}
-      </ul>
+      <ul className="doit-app-doit-list">{renderTodoList()}</ul>
 
       <ModalDialog isOpen={isModalOpen} onClose={closeModal} />
     </div>
