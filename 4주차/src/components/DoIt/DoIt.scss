@@ -5,7 +5,7 @@ $do-it-background-dark: $color-lightblue;
 $do-it-forground: $color-gray-400;
 $do-it-title: $color-blue;
 
-.do-it {
+.doit {
   padding: 16px 20px;
   background-color: $do-it-background;
   border-radius: 12px;
@@ -46,5 +46,9 @@ $do-it-title: $color-blue;
     strong {
       font-weight: 600;
     }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $do-it-background-dark;
   }
 }

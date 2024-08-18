@@ -1,3 +1,4 @@
+import dateToTime from "@/utils/dateToTime";
 import Archive from "../Archive/Archive";
 import Checkbox from "../Checkbox/Checkbox";
 import Divider from "../Divider/Divider";
@@ -7,30 +8,34 @@ interface DoItPropsType {
   content: {
     title: string;
     description: string;
-    noon: "오전" | "오후";
-    startTime: string;
-    endTime: string;
+    startTime: Date;
+    endTime: Date;
   };
 }
 
 const DoIt = ({ content }: DoItPropsType) => {
-  const { title, description, noon, startTime, endTime } = content;
+  const { title, description, startTime, endTime } = content;
+
+  const noon = startTime.getHours() < 12 ? "오전" : "오후";
+  const formattedStartTime = dateToTime(startTime);
+  const formattedEndTime = dateToTime(endTime);
 
   return (
-    <article className="do-it">
-      <div className="do-it-main">
-        <div className="do-it-content">
+    <article className="doit">
+      <div className="doit-main">
+        <div className="doit-content">
           <h2>{title}</h2>
           <p>{description}</p>
         </div>
         <Checkbox />
       </div>
       <Divider style={{ marginBlock: "8px" }} />
-      <div className="do-it-sub">
-        <div className="do-it-time">
+      <div className="doit-sub">
+        <div className="doit-time">
           <strong>오늘 </strong>
           <span>
-            {noon} <time dateTime={startTime}>{startTime}</time> - <time dateTime={endTime}>{endTime}</time>
+            {noon} <time dateTime={formattedStartTime}>{formattedStartTime}</time> -{" "}
+            <time dateTime={formattedEndTime}>{formattedEndTime}</time>
           </span>
         </div>
         <Archive />
