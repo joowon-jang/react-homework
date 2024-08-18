@@ -152,8 +152,6 @@ function App() {
       return newList;
     });
 
-    setIsLoading(true);
-
     await fetch(url, {
       method: "PATCH",
       headers: {
@@ -161,8 +159,6 @@ function App() {
       },
       body: JSON.stringify({ done, archived }),
     });
-
-    setIsLoading(false);
   };
 
   const renderTodoList = () => {
