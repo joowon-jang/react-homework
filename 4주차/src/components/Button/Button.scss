@@ -12,11 +12,12 @@ $button-disabled-background-dark: $color-gray-500;
 $button-disabled-label: $color-gray-300;
 
 .button {
-  width: 100%;
+  @include flexbox($justify: center, $align: center, $gap: 8px);
+  width: fit-content;
   height: fit-content;
 
-  padding: 18px 20px;
-  border-radius: 12px;
+  padding: $space-4-half $space-5;
+  border-radius: $space-3;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;

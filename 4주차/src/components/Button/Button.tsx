@@ -1,15 +1,22 @@
+import { CSSProperties, ReactNode } from "react";
 import "./Button.scss";
 
 interface ButtonPropsType {
-  children: string;
+  children: ReactNode;
   modifier: "primary" | "secondary" | "disabled";
   type?: "submit" | "button" | "reset";
   onClick?: () => void;
+  style?: CSSProperties;
 }
 
-const Button = ({ children, modifier, type = "button", onClick }: ButtonPropsType) => {
+const Button = ({ children, modifier, type = "button", onClick, style }: ButtonPropsType) => {
   return (
-    <button type={type} onClick={onClick} className={`button button--${modifier}`} disabled={modifier === "disabled"}>
+    <button
+      style={style}
+      type={type}
+      onClick={onClick}
+      className={`button button--${modifier}`}
+      disabled={modifier === "disabled"}>
       {children}
     </button>
   );
