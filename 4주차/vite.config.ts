@@ -10,6 +10,7 @@ const viteConfig = defineConfig({
     open: false,
   },
   plugins: [react()],
+  publicDir: "public",
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
