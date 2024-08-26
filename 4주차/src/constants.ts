@@ -1,3 +1,3 @@
-const ENDPOINT = "https://today-do-it.pockethost.io/api/collections/todoItem/records/";
+const ENDPOINT = import.meta.env.VITE_PB_URL + "/api/collections/todoItem/records/";
 
 export default ENDPOINT;
