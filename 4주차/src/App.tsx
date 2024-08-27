@@ -222,9 +222,6 @@ function App() {
 
   return (
     <div id="app" className="doit-app">
-      <button style={{ marginBottom: "20px" }} onClick={handleInstallClick}>
-        Add to Home Screen
-      </button>
       <Logo type="stereo" style={{ marginBottom: "44px" }} />
 
       <h1 className="doit-app__title">우리, 오늘 뭐할까?</h1>
@@ -239,6 +236,18 @@ function App() {
       <ul className="doit-app-doit-list">{renderTodoList()}</ul>
 
       <ModalDialog isLoading={isLoading} isOpen={isModalOpen} onSubmit={handleSubmit} onClose={closeModal} />
+
+      <button
+        style={{
+          marginBlock: "20px",
+          padding: "8px",
+          borderRadius: "8px",
+          backgroundColor: "#e2ebfaff",
+          color: "#0760fbff",
+        }}
+        onClick={handleInstallClick}>
+        홈 화면에 추가
+      </button>
     </div>
   );
 }
