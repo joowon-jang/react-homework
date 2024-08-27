@@ -10,6 +10,11 @@ import formatDate from "./utils/formatDate";
 import timeStringToDate from "./utils/timeStringToDate";
 import PlusImage from "/plus.svg";
 
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
+
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -17,6 +22,38 @@ function App() {
   const [todoList, setTodoList] = useState<TodoListType[]>([]);
   const [status, setStatus] = useState<StatusType>("모두");
   const [filteredList, setFilteredList] = useState<TodoListType[]>(todoList);
+
+  /* ------------------------------------ ㅡ ----------------------------------- */
+  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      (deferredPrompt as BeforeInstallPromptEvent).prompt();
+      (deferredPrompt as BeforeInstallPromptEvent).userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the A2HS prompt");
+        } else {
+          console.log("User dismissed the A2HS prompt");
+        }
+        setDeferredPrompt(null);
+      });
+    }
+  };
+
+  /* ------------------------------------ ㅡ ----------------------------------- */
 
   const dateOfToday = new Date();
 
@@ -185,6 +222,9 @@ function App() {
 
   return (
     <div id="app" className="doit-app">
+      <button style={{ marginBottom: "20px" }} onClick={handleInstallClick}>
+        Add to Home Screen
+      </button>
       <Logo type="stereo" style={{ marginBottom: "44px" }} />
 
       <h1 className="doit-app__title">우리, 오늘 뭐할까?</h1>
